@@ -70,10 +70,10 @@
             </div>
             <div>
                 <h3 class="text-lg font-bold text-slate-800">منطقة خاصة بالمعيد</h3>
-                <p class="text-xs text-slate-500 mt-1">أدخل كلمة المرور للوصول إلى لوحة تحكم السكشن</p>
+                <p class="text-xs text-slate-500 mt-1">أدخل كلمة المرور الموحدة للوصول للوحة التحكم</p>
             </div>
             <form onsubmit="verifyAdminPassword(event)" class="space-y-3">
-                <input type="password" id="adminPasswordInput" placeholder="أدخل كلمة المرور (الافتراضي 1234)" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-sm font-mono focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                <input type="password" id="adminPasswordInput" placeholder="أدخل كلمة المرور السرية" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-center text-sm font-mono focus:ring-2 focus:ring-teal-500 focus:outline-none">
                 <div class="flex gap-2">
                     <button type="button" onclick="closePasswordModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition">إلغاء</button>
                     <button type="submit" class="w-1/2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 rounded-xl text-xs transition">دخول</button>
@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <main class="max-w-4xl mx-auto px-4 pt-6">
+    <main class="max-w-5xl mx-auto px-4 pt-6">
 
         <!-- STUDENT VIEW -->
         <section id="studentSection" class="space-y-6">
@@ -104,7 +104,7 @@
                     <h2 class="text-xl font-bold text-slate-800 flex items-center">
                         <i class="fa-solid fa-pen-to-square text-teal-600 ml-2"></i>تسجيل الحضور اليومي
                     </h2>
-                    <p class="text-xs text-slate-500 mt-1">أدخل بياناتك بدقة. يُسمح لك بالتسجيل مرة واحدة فقط من هذا الجهاز.</p>
+                    <p class="text-xs text-slate-500 mt-1">أدخل بياناتك بدقة. يتم توثيق بصمة جهازك وموقعك لمنع التلاعب.</p>
                 </div>
 
                 <form id="attendanceForm" onsubmit="handleStudentSubmit(event)" class="space-y-5">
@@ -152,7 +152,7 @@
                             <input type="text" id="studentPin" maxlength="4" required placeholder="أدخل الرمز المكون من 4 أرقام" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-mono text-center tracking-widest text-lg font-bold focus:ring-2 focus:ring-teal-500 focus:outline-none transition">
                             <i class="fa-solid fa-key absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                         </div>
-                        <p class="text-[11px] text-slate-400 mt-1">الرمز يظهر على شاشة العرض بالمعمل ويتم تغييره دورياً لمنع الغش.</p>
+                        <p class="text-[11px] text-slate-400 mt-1">الرمز يظهر على شاشة المعيد بالمعمل لتأكيد الحضور الحي.</p>
                     </div>
 
                     <!-- Location Verification Step -->
@@ -187,16 +187,12 @@
                         <h2 class="text-xl font-bold text-slate-800 flex items-center">
                             <i class="fa-solid fa-sliders text-teal-600 ml-2"></i>لوحة تحكم المعيد / الدكتور
                         </h2>
-                        <p class="text-xs text-slate-500">إدارة جلسات السكشن وتوليد الرمز المباشر ومنع الغش</p>
+                        <p class="text-xs text-slate-500">إدارة جلسات السكشن وتوليد الرمز المباشر ومتابعة البصمة الرقمية للطلاب</p>
                     </div>
                     <div class="flex gap-2">
-                        <button onclick="changeAdminPassword()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold px-3 py-2 rounded-xl transition flex items-center space-x-1 space-x-reverse">
-                            <i class="fa-solid fa-key text-slate-500"></i>
-                            <span>تغيير كلمة السر</span>
-                        </button>
                         <button onclick="exportToCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center justify-center space-x-2 space-x-reverse">
                             <i class="fa-solid fa-file-excel text-sm"></i>
-                            <span>تصدير الشيت (Excel / CSV)</span>
+                            <span>تصدير الشيت الكامل (Excel / CSV)</span>
                         </button>
                     </div>
                 </div>
@@ -304,13 +300,14 @@
                                 <th class="p-3">الرقم الجامعي (ID)</th>
                                 <th class="p-3">المادة</th>
                                 <th class="p-3">السكشن</th>
-                                <th class="p-3">وقت التسجيل</th>
-                                <th class="p-3">حالة الأمان</th>
+                                <th class="p-3">الوقت</th>
+                                <th class="p-3">حالة المكان</th>
+                                <th class="p-3">بصمة الجهاز الموثقة (Fingerprint)</th>
                             </tr>
                         </thead>
                         <tbody id="attendanceTableBody" class="divide-y divide-slate-100 bg-white">
                             <tr>
-                                <td colspan="7" class="p-6 text-center text-slate-400">لا توجد تسجيلات حضور حتى الآن لهذا السكشن</td>
+                                <td colspan="8" class="p-6 text-center text-slate-400">لا توجد تسجيلات حضور حتى الآن لهذا السكشن</td>
                             </tr>
                         </tbody>
                     </table>
@@ -321,13 +318,11 @@
 
     <!-- App Logic Script -->
     <script>
-        const SESSION_KEY = 'pharm_active_session_data_v2';
-        const RECORDS_KEY = 'pharm_attendance_records_list_v2';
-        const PWD_KEY = 'pharm_admin_pwd';
-
-        if (!localStorage.getItem(PWD_KEY)) {
-            localStorage.setItem(PWD_KEY, '1234');
-        }
+        const SESSION_KEY = 'pharm_active_session_data_v3';
+        const RECORDS_KEY = 'pharm_attendance_records_list_v3';
+        
+        // Fixed Static Password for TA Access
+        const STATIC_ADMIN_PASSWORD = '2016';
 
         let studentCoords = null;
         let activeSessionData = JSON.parse(localStorage.getItem(SESSION_KEY)) || { isActive: false };
@@ -347,6 +342,34 @@
             renderAttendanceTable();
             connectToCloudBroker();
         });
+
+        // Function to extract Detailed Device Fingerprint
+        function getDeviceFingerprint() {
+            const ua = navigator.userAgent;
+            let os = "غير معروف";
+            if (ua.indexOf("Win") !== -1) os = "Windows";
+            else if (ua.indexOf("Mac") !== -1) os = "MacOS";
+            else if (ua.indexOf("Linux") !== -1) os = "Linux";
+            else if (ua.indexOf("Android") !== -1) os = "Android";
+            else if (ua.indexOf("iPhone") !== -1 || ua.indexOf("iPad") !== -1 || ua.indexOf("like Mac") !== -1) os = "iOS (iPhone)";
+
+            let browser = "متصفح آخر";
+            if (ua.indexOf("Chrome") !== -1 && ua.indexOf("Edg") === -1) browser = "Chrome";
+            else if (ua.indexOf("Safari") !== -1 && ua.indexOf("Chrome") === -1) browser = "Safari";
+            else if (ua.indexOf("Firefox") !== -1) browser = "Firefox";
+            else if (ua.indexOf("Edg") !== -1) browser = "Edge";
+
+            const screenRes = `${window.screen.width}x${window.screen.height}`;
+            
+            // Unique Device UUID per browser installation
+            let deviceUUID = localStorage.getItem('pharm_device_uuid_v1');
+            if (!deviceUUID) {
+                deviceUUID = 'DEV-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+                localStorage.setItem('pharm_device_uuid_v1', deviceUUID);
+            }
+
+            return `${os} | ${browser} | (${screenRes}) | [${deviceUUID}]`;
+        }
 
         function connectToCloudBroker() {
             const statusText = document.getElementById('cloudStatusText');
@@ -435,7 +458,7 @@
 
                 updateStudentBanner();
                 updateAdminPanel();
-                showToast(`تم فتح الجلسة بنجاح وبثها لجميع هواتف الطلاب! الرمز المباشر: ${pin}`, 'success');
+                showToast(`تم فتح الجلسة بنجاح! الرمز المباشر للسكشن: ${pin}`, 'success');
             };
 
             if (requireGps && navigator.geolocation) {
@@ -563,6 +586,9 @@
                 return;
             }
 
+            // Capture Device Fingerprint
+            const deviceFingerprint = getDeviceFingerprint();
+
             const newRecord = {
                 name: name,
                 studentId: studentId,
@@ -570,7 +596,8 @@
                 sectionNum: sectionNum,
                 timestamp: new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' }),
                 date: new Date().toLocaleDateString('ar-EG'),
-                distanceFromLab: distanceText
+                distanceFromLab: distanceText,
+                deviceInfo: deviceFingerprint
             };
 
             allAttendanceRecords.push(newRecord);
@@ -580,7 +607,7 @@
             publishRecordToCloud(newRecord);
 
             renderAttendanceTable();
-            showToast('تم تسجيل حضورك بنجاح وسحب البيانات المعنية للشيت!', 'success');
+            showToast('تم تسجيل حضورك بنجاح وسحب بصمة الجهاز للشيت!', 'success');
             document.getElementById('attendanceForm').reset();
             studentCoords = null;
             document.getElementById('locationStatusBadge').innerText = "لم يتم التحقق";
@@ -618,9 +645,8 @@
         window.verifyAdminPassword = function(e) {
             e.preventDefault();
             const pwdInput = document.getElementById('adminPasswordInput').value;
-            const storedPwd = localStorage.getItem(PWD_KEY);
 
-            if (pwdInput === storedPwd) {
+            if (pwdInput === STATIC_ADMIN_PASSWORD) {
                 isAdminAuthenticated = true;
                 closePasswordModal();
                 showAdminDashboard();
@@ -633,21 +659,6 @@
 
         window.closePasswordModal = function() {
             document.getElementById('passwordModal').classList.add('hidden');
-        };
-
-        window.changeAdminPassword = function() {
-            const currentPwd = prompt('أدخل كلمة السر الحالية:');
-            if (currentPwd !== localStorage.getItem(PWD_KEY)) {
-                showToast('كلمة السر الحالية غير صحيحة!', 'error');
-                return;
-            }
-            const newPwd = prompt('أدخل كلمة السر الجديدة:');
-            if (newPwd && newPwd.trim().length >= 4) {
-                localStorage.setItem(PWD_KEY, newPwd.trim());
-                showToast('تم تغيير كلمة السر بنجاح!', 'success');
-            } else {
-                showToast('كلمة السر يجب أن تكون 4 أرقام أو حروف على الأقل', 'error');
-            }
         };
 
         function calculateDistanceMeters(lat1, lon1, lat2, lon2) {
@@ -758,7 +769,7 @@
             recordBadge.innerText = `${filtered.length} طالب`;
 
             if (filtered.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-400">لا توجد تسجيلات حضور حتى الآن لهذا السكشن</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" class="p-6 text-center text-slate-400">لا توجد تسجيلات حضور حتى الآن لهذا السكشن</td></tr>`;
                 return;
             }
 
@@ -766,7 +777,7 @@
                 <tr class="hover:bg-slate-50 transition">
                     <td class="p-3 font-bold text-slate-400">${index + 1}</td>
                     <td class="p-3 font-bold text-slate-800">${rec.name}</td>
-                    <td class="p-3 font-mono text-teal-700">${rec.studentId}</td>
+                    <td class="p-3 font-mono text-teal-700 font-bold">${rec.studentId}</td>
                     <td class="p-3 text-slate-600">${rec.course}</td>
                     <td class="p-3 font-bold text-slate-700">سكشن ${rec.sectionNum}</td>
                     <td class="p-3 text-slate-500">${rec.timestamp}</td>
@@ -774,6 +785,9 @@
                         <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full inline-flex items-center">
                             <i class="fa-solid fa-shield-halved ml-1 text-emerald-600"></i> ${rec.distanceFromLab}
                         </span>
+                    </td>
+                    <td class="p-3 text-[11px] font-mono text-slate-600 bg-slate-50 rounded">
+                        <i class="fa-solid fa-mobile-screen ml-1 text-slate-400"></i> ${rec.deviceInfo || 'غير معروف'}
                     </td>
                 </tr>
             `).join('');
@@ -801,9 +815,9 @@
                 return;
             }
 
-            let csvContent = "\uFEFFم,اسم الطالب,الرقم الجامعي,المادة,رقم السكشن,الوقت,التاريخ,حالة الأمان\n";
+            let csvContent = "\uFEFFم,اسم الطالب,الرقم الجامعي,المادة,رقم السكشن,الوقت,التاريخ,حالة المكان,بصمة تفاصيل الجهاز\n";
             records.forEach((r, idx) => {
-                csvContent += `"${idx + 1}","${r.name}","${r.studentId}","${r.course}","سكشن ${r.sectionNum}","${r.timestamp}","${r.date}","${r.distanceFromLab}"\n`;
+                csvContent += `"${idx + 1}","${r.name}","${r.studentId}","${r.course}","سكشن ${r.sectionNum}","${r.timestamp}","${r.date}","${r.distanceFromLab}","${r.deviceInfo || 'N/A'}"\n`;
             });
 
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -815,7 +829,7 @@
             link.click();
             document.body.removeChild(link);
 
-            showToast('تم تصدير ملف الاكسل بنجاح!', 'success');
+            showToast('تم تصدير ملف الاكسل موثقاً ببصمات الأجهزة بنجاح!', 'success');
         };
 
         function showToast(message, type = 'info') {
